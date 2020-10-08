@@ -9,8 +9,11 @@ class mytest {
   package { 'python2-pip':
     ensure => 'present',
   }
-  ~> exec {'Install GeoIP throught pip':
-    command => '/usr/bin/pip install GeoIP'
+
+  package { 'GeoIP':
+    provider => pip,
+    command => '/usr/bin/pip',
+    require => Package['python2-pip'],
   }
 
 # create file with content
